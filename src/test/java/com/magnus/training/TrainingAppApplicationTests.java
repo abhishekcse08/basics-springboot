@@ -1,4 +1,4 @@
-package com.magnus.training.training;
+package com.magnus.training;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

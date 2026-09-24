@@ -1,6 +1,5 @@
-package com.magnus.training.training.concepts;
+package com.magnus.training.concepts;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

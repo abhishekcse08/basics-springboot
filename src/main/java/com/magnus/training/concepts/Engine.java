@@ -1,4 +1,4 @@
-package com.magnus.training.training.concepts;
+package com.magnus.training.concepts;
 // Basic example
 public class Engine {
 

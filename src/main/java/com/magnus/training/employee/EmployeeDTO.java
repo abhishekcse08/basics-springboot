@@ -1,21 +1,21 @@
-package com.magnus.training.training.employee;
+package com.magnus.training.employee;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Employee {
+public class EmployeeDTO {
 
     private int id;
     private String name;
     private String deptName;
 
-    public Employee() {
+    public EmployeeDTO() {
         System.out.println("1-: Bean is created");
     }
 
-    public Employee(int id, String name, String deptName) {
+    public EmployeeDTO(int id, String name, String deptName) {
         this.id = id;
         this.name = name;
         this.deptName = deptName;
