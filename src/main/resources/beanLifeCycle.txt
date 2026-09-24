@@ -1,0 +1,21 @@
+Spring Container start
+   |
+   Bean Initiation
+   |
+   Dependency Injection
+   |
+   @PostConstruct()
+   |
+   Bean is ready for Use
+   |
+   @PreDestroy()
+   |
+   Bean Destroy
+
+------------
+1- Bean Life cycle( type of object which perform some tasks object )
+2- IOC & DI
+3- How to create a REST API
+4- How to call the API
+5- Component & Service annotations
+
