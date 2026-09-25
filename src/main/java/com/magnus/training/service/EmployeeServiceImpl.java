@@ -1,62 +1,81 @@
 package com.magnus.training.service;
 
 import com.magnus.training.employee.EmployeeDTO;
+import com.magnus.training.entity.Employee;
 import com.magnus.training.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
 public class EmployeeServiceImpl implements EmployeeService{
 
 
-    @Autowired
-    EmployeeRepository employeeRepository;
+   /* @Autowired
+    EmployeeRepository employeeRepository;*/
 
-    @Override
-    public Map<Integer, EmployeeDTO> getEmployeeFromDB() {
-       return createEmployees();
+    private final EmployeeRepository employeeRepository;
+
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
-    public Map<Integer, EmployeeDTO> addEmployee(EmployeeDTO emp) {
-        Map<Integer, EmployeeDTO> employees = createEmployees();
-        //employees.put(5,emp);
-        //Employee employee = new Employee(emp.getId(),emp.getName(), emp.getDeptName());
-       // employeeJpaService.saveEmployee(employee);
-        return employees;
+    public List<EmployeeDTO> getEmployeeFromDB() {
+        List<Employee> all = employeeRepository.findAll();
+        /*List<EmployeeDTO> list = all.stream()
+                .map(empDBData -> {
+                    EmployeeDTO employeeDTO = new EmployeeDTO(
+                            empDBData.getId()
+                            , empDBData.getName()
+                            , empDBData.getDepartment()
+                            , empDBData.getContactNo()
+                            , empDBData.getSalary());
+                    return employeeDTO;
+                })
+                .toList();
+*/
+        List<EmployeeDTO> list = new ArrayList<>();
+        for (Employee empDBData:all){
+            EmployeeDTO employeeDTO = new EmployeeDTO(
+                    empDBData.getId()
+                    , empDBData.getName()
+                    , empDBData.getDepartment()
+                    , empDBData.getContactNo()
+                    , empDBData.getSalary());
+            list.add(employeeDTO);
+        }
+       return list;
     }
 
     @Override
-    public Map<Integer, EmployeeDTO> createEmployee() {
-        return createEmployees();
-    }
+    public EmployeeDTO addEmployee(EmployeeDTO emp) {
+       // Creating DB object and setting data to DB object from DTO
+        Employee employee = new Employee();
+        employee.setName(emp.getName());
+        employee.setDepartment(emp.getDeptName());
+        employee.setContactNo(emp.getContactNo());
+        employee.setSalary(emp.getSalary());
+        //Saving data to DB
+        Employee empDBData = employeeRepository.save(employee);
 
+        //Creating new DTO and setting data from DB
+        EmployeeDTO employeeDTO = new EmployeeDTO(
+                empDBData.getId(),empDBData.getName(),empDBData.getDepartment()
+                ,empDBData.getContactNo(),empDBData.getSalary());
+        return employeeDTO;
+    }
 
     @Override
-    public Map<Integer, EmployeeDTO> deleteEmployee(int id) {
-        Map<Integer, EmployeeDTO> employees = createEmployees();
-        employees.remove(id);
-        return employees;
+    public void deleteEmployee(int id) {
+        employeeRepository.deleteById(id);
     }
 
 
-    private Map<Integer, EmployeeDTO> createEmployees() {
-        EmployeeDTO e1 = new EmployeeDTO(1, "Jhon", "OPS");
-        EmployeeDTO e2 = new EmployeeDTO(2, "Kenneth", "IT");
-        EmployeeDTO e3 = new EmployeeDTO(3, "Danny", "HR");
-        EmployeeDTO e4 = new EmployeeDTO(4, "Alice", "DEVOPS");
-        Map<Integer, EmployeeDTO> empMap = new HashMap<>();
-
-        empMap.put(1, e1);
-        empMap.put(2, e2);
-        empMap.put(3, e3);
-        empMap.put(4, e4);
-
-        return empMap;
-    }
 }

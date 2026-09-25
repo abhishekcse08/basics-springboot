@@ -1,0 +1,28 @@
+ - brew services stop mysql
+ - brew install mysql@8.4
+ - brew services start mysql@8.4
+ - brew services stop mysql@8.4
+ - brew services start mysql
+
+
+ MySQL is configured to only allow connections from localhost by default
+
+ To connect run:
+     mysql -u root
+
+ To start mysql now and restart at login:
+   brew services start mysql
+
+--------
+mysql -u root -p
+it will ask for password use password
+
+spring.datasource.url=jdbc:mysql://localhost:3306/trainingdb
+spring.datasource.username=root
+spring.datasource.password=YourNewPassword123!
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# Open UI in dbeaver using below
+open -a DBeaver
+or
+open -a "MySQLWorkbench"

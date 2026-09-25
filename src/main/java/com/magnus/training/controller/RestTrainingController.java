@@ -2,31 +2,35 @@ package com.magnus.training.controller;
 
 import com.magnus.training.service.EmployeeService;
 import com.magnus.training.employee.EmployeeDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
 public class RestTrainingController {
 
- /*   @Autowired
-    EmployeeService es ;*/
+    private final EmployeeService es;
 
-    @Autowired
-    EmployeeService es;
+    public RestTrainingController(EmployeeService es) {
+        this.es = es;
+    }
 
     @GetMapping("/getEmployee")
-    public Map<Integer, EmployeeDTO> getEmployee(){
+    public List<EmployeeDTO> getEmployee(){
         return es.getEmployeeFromDB();
     }
 
     @PostMapping("/addEmployee")
-    public Map<Integer, EmployeeDTO> addEmployee(@RequestBody EmployeeDTO e){
-        Map<Integer, EmployeeDTO> employeeFromDB = es.getEmployeeFromDB();
-        employeeFromDB.put(5,e);
+    public EmployeeDTO addEmployee(@RequestBody EmployeeDTO e){
+        EmployeeDTO employeeFromDB = es.addEmployee(e);
         return employeeFromDB;
+    }
+
+    @DeleteMapping("deleteById/{id}")
+    public String deleteEmployeeById(@PathVariable Integer id){
+        es.deleteEmployee(id);
+        return "Employee deleted!!!";
     }
 
 }

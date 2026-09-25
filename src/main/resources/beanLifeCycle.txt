@@ -19,3 +19,8 @@ Spring Container start
 4- How to call the API
 5- Component & Service annotations
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
