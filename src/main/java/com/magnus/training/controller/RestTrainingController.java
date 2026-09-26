@@ -1,5 +1,6 @@
 package com.magnus.training.controller;
 
+import com.magnus.training.employee.EmpManagerDto;
 import com.magnus.training.service.EmployeeService;
 import com.magnus.training.employee.EmployeeDTO;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,22 @@ public class RestTrainingController {
     public String deleteEmployeeById(@PathVariable Integer id){
         es.deleteEmployee(id);
         return "Employee deleted!!!";
+    }
+
+    @GetMapping("findEmployeeByID")
+    public EmployeeDTO findEmployeeById(@RequestParam Integer id){
+      return es.findEmployeeById(id);
+    }
+
+    @GetMapping("findEmployeeByName")
+    public EmployeeDTO findEmployeeByName(@RequestParam String name){
+        return es.findEmployeeByName(name);
+    }
+
+    @GetMapping("findEmployeeByName")
+    public List<EmpManagerDto> findEmployeeManger(){
+       // return es.findEmployeeAndManager();
+        return null;
     }
 
 }

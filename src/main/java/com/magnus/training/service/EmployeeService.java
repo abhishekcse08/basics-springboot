@@ -12,5 +12,10 @@ public interface EmployeeService {
 List<EmployeeDTO> getEmployeeFromDB();
 EmployeeDTO addEmployee(EmployeeDTO emp);
 void deleteEmployee(int id);
+EmployeeDTO findEmployeeById(int id);
+
+EmployeeDTO findEmployeeByName(String name);
+
+List<Object> findEmployeeAndManager();
 
 }
